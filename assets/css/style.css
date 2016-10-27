@@ -1,14 +1,49 @@
 body {
+    background-color: #444;
+}
+button.topic {
+    margin: 5px 10px;
+    background-color: #ce64ce;
+    border-radius: 11px;
+    padding: 8px;
+    border: 0;
+    color: white;
+    font-size: large;
 }
 h1 {
-    
+    width: 30%;
+    float: left;
 }
-h2 {
+h3 {
+    margin-bottom: 0;
 }
 section {
-	
+	max-width: 870px;
+    margin: auto;
+    background-color: white;
 }
-
+#input {
+    float: right;
+}
+#buttons {
+    clear: both;
+}
+div.img {    
+    float: left;
+    width: 25%;
+    overflow: hidden;
+    margin: 10px;
+    position: relative;
+}
+div.img img.still {
+    width: 100%;
+}
+div.img img.anim {
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
 /* responsive styles! */
 @media screen and (max-width: 750px) {
 }
