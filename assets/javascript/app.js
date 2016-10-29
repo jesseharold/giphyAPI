@@ -1,36 +1,60 @@
-var topics = ["Arya Stark", "Tyrion Lannister", "Brynden Blackfish Tully", "Hodor", "Littlefinger", "Jon Snow", "Brienne of Tarth"];
-var apiUrl = "http://api.giphy.com/v1/gifs/search?";
-var apiOptions = "&limit=10"
-var apiKey = "&api_key=dc6zaTOxFJmzC";
+var giphyApp = {
+    topics : ["Arya Stark", "Tyrion Lannister", "Brynden Blackfish Tully", "Hodor", "Littlefinger", "Jon Snow", "Brienne of Tarth"],
+    apiUrl : "http://api.giphy.com/v1/gifs/search?",
+    apiOptions : "&limit=10",
+    apiKey : "&api_key=dc6zaTOxFJmzC",
+    init : function(){
+        // create initial buttons
+        for (var i = 0; i < giphyApp.topics.length; i++) {
+            giphyApp.addButton(giphyApp.topics[i]);
+        }
 
-for (var i = 0; i < topics.length; i++) {
-	$("#buttons").append("<button class='topic'>" + topics[i] + "</button>");
-}
+        //event listeners
+        $("#buttons").on("click", "button.topic", function(){
+            var topic = $(this).text();
+            giphyApp.getImages(topic);
+        });
+        $("#images").on("click", "img.still", function(){
+            $(this).hide().prev("img.anim").show();
+        });
+        $("#images").on("click", "img.anim", function(){
+            $(this).hide().next("img.still").show();
+        });
+        $("#addChar").on("click", function(){
+            giphyApp.addButton($(this).prev("input").val());
+        });
+    },//init()
+    getImages : function(query){
+        $.ajax({
+                url: giphyApp.apiUrl + "q=" + query + giphyApp.apiOptions + giphyApp.apiKey,
+                method: 'GET'
+            })
+            .done(function(response) {
+                //build the image html
+                for (var i = 0; i < response.data.length; i++) {
+                    var container = $("<div>");
+                    container.addClass("img");
+                    var img1 = $("<img>");
+                    img1.addClass("anim").attr("src", response.data[i].images.downsized.url)
+                        .attr("width", response.data[i].images.downsized.width);
+                    container.append(img1);
+                    var img2 = $("<img>");
+                    img2.addClass("still").attr("src", response.data[i].images.downsized_still.url)
+                        .attr("width", response.data[i].images.downsized_still.width);
+                    container.append(img2);
+                    var rating = $("<div>");
+                    rating.addClass("rating").text("Rating: " + response.data[i].rating.toUpperCase());
+                        
+                    $("#images").append(container);
+                }
+            });
 
-$("#buttons").on("click", "button.topic", function(){
-	var query = $(this).text();
-	$.ajax({
-            url: apiUrl + "q=" + query + apiOptions + apiKey,
-            method: 'GET'
-        })
-        .done(function(response) {
-        	console.log(response.data[0]);
-        	for (var i = 0; i < response.data.length; i++) {
-        		var html = "<div class='img'><img class='anim' src='" + response.data[i].images.downsized.url;
-        		html += "' width='response.data[i].images.downsized.width' height='response.data[i].images.downsized.height'>";
-        		html += "<img class='still' src='" + response.data[i].images.downsized_still.url + "'>";
-        		html += "<div class='rating'>Rating: " + response.data[i].rating.toUpperCase() + "</div></div>";
-        		$("#images").append(html);
-        	}
-       	});
+    },//getImages()
+    addButton : function(label){
+        var button = $("<button>");
+        button.addClass("topic").text(label);
+        $("#buttons").append(button);
+    }
+};//giphyApp object
 
-});
-$("#images").on("click", "img.still", function(){
-	$(this).hide().prev("img.anim").show();
-});
-$("#images").on("click", "img.anim", function(){
-	$(this).hide().next("img.still").show();
-});
-$("#addChar").on("click", function(){
-	$("#buttons").append("<button class='topic'>" + $(this).prev("input").val() + "</button>");
-});
+$("document").ready(giphyApp.init);
