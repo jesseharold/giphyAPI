@@ -1,5 +1,5 @@
 body {
-    background-color: #444;
+    background-color: #222;
     font-family: "Yanone Kaffeesatz", Helvetica, sans-serif;
 }
 button.topic {
@@ -59,6 +59,13 @@ div.img img.anim {
 }
 div.rating {
     text-align: center;
+    color: #888;
+}
+div.rating .seeLarger {
+    display: inline-block;
+    margin-left: 20px;
+    text-decoration: underline;
+    cursor: pointer;
 }
 #more {
     cursor: pointer;
@@ -68,6 +75,35 @@ div.rating {
     text-align: center;
     font-size: xx-large;
     text-shadow: white -2px 2px 1px;
+}
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10% 5%;
+}
+#overlay #overlayBG {
+    background-color: black;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+#overlay #lgImage {
+    display: block;
+    margin: auto;
+    position: relative;
+}
+#overlay #closeOverlay {
+    display: block;
+    margin: auto;
+    position: relative;
+    margin-top: 20px;
 }
 /* got this from csstricks.com*/
 .clearfix:after {

@@ -23,6 +23,12 @@ var giphyApp = {
             giphyApp.topics.push($(this).prev("input").val());
             giphyApp.makeButtons();
         });
+        $("#images").on("click", ".seeLarger", function(){
+            giphyApp.showOverlay($(this).data("largeUrl"));
+        });
+        $("body").on("click", "#closeOverlay", function(){
+            $("#overlay").hide().find("#lgImage").attr("src", "#");
+        });
     },//init()
     getImages : function(query, startAt){
         if (!startAt){
@@ -69,10 +75,17 @@ var giphyApp = {
             .attr("width", imgObj.images.downsized_still.width);
         var rating = $("<div>");
         rating.addClass("rating").text("Rating: " + imgObj.rating.toUpperCase());
+        var seeLarger = $("<div>");
+        seeLarger.addClass("seeLarger").text("See Larger >")
+            .data("largeUrl", imgObj.images.original.url);
+        rating.append(seeLarger);
         
         container.append(img1).append(img2).append(rating);
         return container;
-    }
+    }, //createSingleImage()
+    showOverlay : function(url){
+        $("#overlay").show().find("#lgImage").attr("src", url);
+    } // showOverlay()
 };//giphyApp object
 
 $("document").ready(giphyApp.init);
