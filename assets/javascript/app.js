@@ -1,7 +1,8 @@
 var giphyApp = {
     topics : ["Arya Stark", "Tyrion Lannister", "Brynden Blackfish Tully", "Hodor", "Littlefinger", "Jon Snow", "Brienne of Tarth"],
+    currentlyShowing : 0, // keep track of how many are showing right now
+    showHowMany : 10, //change how many get displayed at a time
     apiUrl : "https://api.giphy.com/v1/gifs/search?",
-    apiOptions : "&limit=10",
     apiKey : "&api_key=dc6zaTOxFJmzC",
     init : function(){
         // create initial buttons
@@ -23,15 +24,19 @@ var giphyApp = {
             giphyApp.makeButtons();
         });
     },//init()
-    getImages : function(query){
-        $("#images").empty();
+    getImages : function(query, startAt){
+        if (!startAt){
+            // this is the first round for this query
+            $("#images").empty();
+            giphyApp.currentlyShowing = 0;
+        }
         $.ajax({
-                url: giphyApp.apiUrl + "q=" + query + giphyApp.apiOptions + giphyApp.apiKey,
+                url: giphyApp.apiUrl + "q=" + query + "&limit="+ (giphyApp.currentlyShowing+giphyApp.showHowMany) + giphyApp.apiKey,
                 method: 'GET'
             })
             .done(function(response) {
                 //build the image html
-                for (var i = 0; i < response.data.length; i++) {
+                for (var i = giphyApp.currentlyShowing; i < response.data.length; i++) {
                     var container = $("<div>");
                     container.addClass("img");
                     var img1 = $("<img>");
@@ -46,6 +51,10 @@ var giphyApp = {
                     container.append(img1).append(img2).append(rating);    
                     $("#images").append(container);
                 }
+                giphyApp.currentlyShowing += giphyApp.showHowMany;
+                $("#more").show().click(function(){
+                        giphyApp.getImages(query, giphyApp.currentlyShowing);
+                });
             });
 
     },//getImages()
