@@ -1,6 +1,6 @@
 var giphyApp = {
     topics : ["Arya Stark", "Tyrion Lannister", "Brynden Blackfish Tully", "Hodor", "Littlefinger", "Jon Snow", "Brienne of Tarth"],
-    currentlyShowing : 0, // keep track of how many are showing right now
+    currentlyShowing : 0, // keep track of how many images are on the page right now
     showHowMany : 10, //change how many get displayed at a time
     apiUrl : "https://api.giphy.com/v1/gifs/search?",
     apiKey : "&api_key=dc6zaTOxFJmzC",
@@ -35,23 +35,14 @@ var giphyApp = {
                 method: 'GET'
             })
             .done(function(response) {
-                //build the image html
+                // create current round of images
                 for (var i = giphyApp.currentlyShowing; i < response.data.length; i++) {
-                    var container = $("<div>");
-                    container.addClass("img");
-                    var img1 = $("<img>");
-                    img1.addClass("anim").attr("src", response.data[i].images.downsized.url)
-                        .attr("width", response.data[i].images.downsized.width);
-                    var img2 = $("<img>");
-                    img2.addClass("still").attr("src", response.data[i].images.downsized_still.url)
-                        .attr("width", response.data[i].images.downsized_still.width);
-                    var rating = $("<div>");
-                    rating.addClass("rating").text("Rating: " + response.data[i].rating.toUpperCase());
-                    
-                    container.append(img1).append(img2).append(rating);    
-                    $("#images").append(container);
+                    var thisImg = giphyApp.createSingleImage(response.data[i]);    
+                    $("#images").append(thisImg);
                 }
+                // keep track of how many images are showing
                 giphyApp.currentlyShowing += giphyApp.showHowMany;
+                // reset behavior of the more button 
                 $("#more").show().text("More " + query +" >>").off().click(function(){
                         giphyApp.getImages(query, giphyApp.currentlyShowing);
                 });
@@ -65,6 +56,22 @@ var giphyApp = {
             button.addClass("topic").text(giphyApp.topics[i]);
             $("#buttons").append(button);
         }
+    },//makeButtons()
+    createSingleImage : function(imgObj){
+        //build html for a single image item
+        var container = $("<div>");
+        container.addClass("img");
+        var img1 = $("<img>");
+        img1.addClass("anim").attr("src", imgObj.images.downsized.url)
+            .attr("width", imgObj.images.downsized.width);
+        var img2 = $("<img>");
+        img2.addClass("still").attr("src", imgObj.images.downsized_still.url)
+            .attr("width", imgObj.images.downsized_still.width);
+        var rating = $("<div>");
+        rating.addClass("rating").text("Rating: " + imgObj.rating.toUpperCase());
+        
+        container.append(img1).append(img2).append(rating);
+        return container;
     }
 };//giphyApp object
 
