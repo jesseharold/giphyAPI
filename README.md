@@ -1,7 +1,8 @@
 # giphyAPI
 Gets images from the giphy API using jquery
 
-https://protected-basin-67770.herokuapp.com/
+https://murmuring-bastion-27234.herokuapp.com/
+
 Additional Features:
  - "more" button to add additional batches of 10 images
  - "see larger" link to open an overlay that shows the original size
