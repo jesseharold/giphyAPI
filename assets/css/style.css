@@ -18,7 +18,8 @@ h1 {
 }
 h3 {
     margin-bottom: 0;
-    font-size: 33px;
+    font-size: 30px;
+    font-weight: normal;
 }
 section {
 	max-width: 870px;
@@ -27,6 +28,11 @@ section {
     color: #bbb;
     padding: 1% 2%;
     box-sizing: border-box;
+}
+#header {
+    background-image: url("../images/bg.jpg");
+    background-position-y: -70px;
+    background-repeat: no-repeat;
 }
 #input {
     text-align: right;
