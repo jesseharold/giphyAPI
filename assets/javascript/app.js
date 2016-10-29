@@ -52,7 +52,7 @@ var giphyApp = {
                     $("#images").append(container);
                 }
                 giphyApp.currentlyShowing += giphyApp.showHowMany;
-                $("#more").show().click(function(){
+                $("#more").show().off().click(function(){
                         giphyApp.getImages(query, giphyApp.currentlyShowing);
                 });
             });
