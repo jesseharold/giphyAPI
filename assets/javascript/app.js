@@ -1,6 +1,6 @@
 var giphyApp = {
     topics : ["Arya Stark", "Tyrion Lannister", "Brynden Blackfish Tully", "Hodor", "Littlefinger", "Jon Snow", "Brienne of Tarth"],
-    apiUrl : "http://api.giphy.com/v1/gifs/search?",
+    apiUrl : "https://api.giphy.com/v1/gifs/search?",
     apiOptions : "&limit=10",
     apiKey : "&api_key=dc6zaTOxFJmzC",
     init : function(){
