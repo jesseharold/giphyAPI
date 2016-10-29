@@ -21,8 +21,11 @@ section {
 	max-width: 870px;
     margin: auto;
     background-color: white;
+    padding: 1% 2%;
+    box-sizing: border-box;
 }
 #input {
+    text-align: right;
     float: right;
 }
 #buttons {
@@ -30,7 +33,7 @@ section {
 }
 div.img {    
     float: left;
-    width: 25%;
+    width: 30%;
     overflow: hidden;
     margin: 10px;
     position: relative;

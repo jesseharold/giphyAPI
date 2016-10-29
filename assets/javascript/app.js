@@ -5,9 +5,7 @@ var giphyApp = {
     apiKey : "&api_key=dc6zaTOxFJmzC",
     init : function(){
         // create initial buttons
-        for (var i = 0; i < giphyApp.topics.length; i++) {
-            giphyApp.addButton(giphyApp.topics[i]);
-        }
+        giphyApp.makeButtons();
 
         //event listeners
         $("#buttons").on("click", "button.topic", function(){
@@ -21,10 +19,12 @@ var giphyApp = {
             $(this).hide().next("img.still").show();
         });
         $("#addChar").on("click", function(){
-            giphyApp.addButton($(this).prev("input").val());
+            giphyApp.topics.push($(this).prev("input").val());
+            giphyApp.makeButtons();
         });
     },//init()
     getImages : function(query){
+        $("#images").empty();
         $.ajax({
                 url: giphyApp.apiUrl + "q=" + query + giphyApp.apiOptions + giphyApp.apiKey,
                 method: 'GET'
@@ -37,23 +37,25 @@ var giphyApp = {
                     var img1 = $("<img>");
                     img1.addClass("anim").attr("src", response.data[i].images.downsized.url)
                         .attr("width", response.data[i].images.downsized.width);
-                    container.append(img1);
                     var img2 = $("<img>");
                     img2.addClass("still").attr("src", response.data[i].images.downsized_still.url)
                         .attr("width", response.data[i].images.downsized_still.width);
-                    container.append(img2);
                     var rating = $("<div>");
                     rating.addClass("rating").text("Rating: " + response.data[i].rating.toUpperCase());
-                        
+                    
+                    container.append(img1).append(img2).append(rating);    
                     $("#images").append(container);
                 }
             });
 
     },//getImages()
-    addButton : function(label){
-        var button = $("<button>");
-        button.addClass("topic").text(label);
-        $("#buttons").append(button);
+    makeButtons : function(){
+        $("#buttons").empty();
+        for (var i = 0; i < giphyApp.topics.length; i++) {
+            var button = $("<button>");
+            button.addClass("topic").text(giphyApp.topics[i]);
+            $("#buttons").append(button);
+        }
     }
 };//giphyApp object
 
