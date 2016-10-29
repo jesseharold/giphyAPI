@@ -1,5 +1,5 @@
 var giphyApp = {
-    topics : ["Arya Stark", "Tyrion Lannister", "Brynden Blackfish Tully", "Hodor", "Littlefinger", "Jon Snow", "Brienne of Tarth"],
+    topics : ["Arya Stark", "Tyrion Lannister", "Brynden Blackfish Tully", "Hodor", "Littlefinger", "Jon Snow", "Brienne of Tarth", "Jaime Lannister", "Tywin Lannister", "Melisandre", "Ser Barristan", "The Hound"],
     currentlyShowing : 0, // keep track of how many images are on the page right now
     showHowMany : 10, //change how many get displayed at a time
     apiUrl : "https://api.giphy.com/v1/gifs/search?",
