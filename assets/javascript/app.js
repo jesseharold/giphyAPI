@@ -13,11 +13,15 @@ var giphyApp = {
             var topic = $(this).text();
             giphyApp.getImages(topic);
         });
-        $("#images").on("click", "img.still", function(){
-            $(this).hide().prev("img.anim").show();
-        });
-        $("#images").on("click", "img.anim", function(){
-            $(this).hide().next("img.still").show();
+        $("#images").on("click", "img.giphyImg", function(){
+            var url;
+            if ($(this).data("state") === "still"){
+                url = $(this).data("anim-src");
+            } else {
+                url = $(this).data("still-src");
+
+            }
+            $(this).attr("src", url);
         });
         $("#addChar").on("click", function(){
             giphyApp.topics.push($(this).prev("input").val());
@@ -67,12 +71,14 @@ var giphyApp = {
         //build html for a single image item
         var container = $("<div>");
         container.addClass("img");
-        var img1 = $("<img>");
-        img1.addClass("anim").attr("src", imgObj.images.downsized.url)
+
+        var img1 = $("<img>").addClass("giphyImg");
+        img1.data("anim-src", imgObj.images.downsized.url)
+            .data("still-src", imgObj.images.downsized_still.url)
+            .data("state", "still")
+            .attr("src", imgObj.images.downsized_still.url)
             .attr("width", imgObj.images.downsized.width);
-        var img2 = $("<img>");
-        img2.addClass("still").attr("src", imgObj.images.downsized_still.url)
-            .attr("width", imgObj.images.downsized_still.width);
+
         var rating = $("<div>");
         rating.addClass("rating").text("Rating: " + imgObj.rating.toUpperCase());
         var seeLarger = $("<div>");
@@ -80,7 +86,7 @@ var giphyApp = {
             .data("largeUrl", imgObj.images.original.url);
         rating.append(seeLarger);
         
-        container.append(img1).append(img2).append(rating);
+        container.append(img1).append(rating);
         return container;
     }, //createSingleImage()
     showOverlay : function(url){
