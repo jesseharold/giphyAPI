@@ -24,14 +24,18 @@ var giphyApp = {
             $(this).attr("src", url);
         });
         $("#add-character").on("click", function(){
-            giphyApp.topics.push($(this).prev("input").val());
+            var characterName = $(this).prev("input").val();
+            giphyApp.topics.push(characterName);
             giphyApp.makeButtons();
         });
         $("#images").on("click", ".see-larger", function(){
             giphyApp.showOverlay($(this).data("largeUrl"));
         });
         $("body").on("click", "#close-overlay", function(){
-            $("#overlay").hide().find("#large-image").attr("src", "#");
+            $("#overlay")
+                .hide()
+                .find("#large-image")
+                .attr("src", "#");
         });
     },//init()
     getImages : function(query, startAt){
@@ -47,13 +51,17 @@ var giphyApp = {
             .done(function(response) {
                 // create current round of images
                 for (var i = giphyApp.currentlyShowing; i < response.data.length; i++) {
-                    var thisImg = giphyApp.createSingleImage(response.data[i]);    
-                    $("#images").append(thisImg);
+                    var thisImage = giphyApp.createSingleImage(response.data[i]);    
+                    $("#images").append(thisImage);
                 }
                 // keep track of how many images are showing
                 giphyApp.currentlyShowing += giphyApp.showHowMany;
                 // reset behavior of the more button 
-                $("#more").show().text("More " + query +" >>").off().click(function(){
+                $("#more")
+                    .show()
+                    .text("More " + query +" >>")
+                    .off()
+                    .click(function(){
                         giphyApp.getImages(query, giphyApp.currentlyShowing);
                 });
             });
@@ -63,7 +71,9 @@ var giphyApp = {
         $("#buttons").empty();
         for (var i = 0; i < giphyApp.topics.length; i++) {
             var button = $("<button>");
-            button.addClass("topic").text(giphyApp.topics[i]);
+            button
+                .addClass("topic")
+                .text(giphyApp.topics[i]);
             $("#buttons").append(button);
         }
     },//makeButtons()
@@ -80,9 +90,13 @@ var giphyApp = {
             .attr("width", imgObj.images.downsized.width);
 
         var rating = $("<div>");
-        rating.addClass("rating").text("Rating: " + imgObj.rating.toUpperCase());
+        rating
+            .addClass("rating")
+            .text("Rating: " + imgObj.rating.toUpperCase());
         var seeLarger = $("<div>");
-        seeLarger.addClass("see-larger").text("See Larger >")
+        seeLarger
+            .addClass("see-larger")
+            .text("See Larger >")
             .data("largeUrl", imgObj.images.original.url);
         rating.append(seeLarger);
         
@@ -90,7 +104,10 @@ var giphyApp = {
         return container;
     }, //createSingleImage()
     showOverlay : function(url){
-        $("#overlay").show().find("#large-image").attr("src", url);
+        $("#overlay")
+            .show()
+            .find("#large-image")
+            .attr("src", url);
     } // showOverlay()
 };//giphyApp object
 
