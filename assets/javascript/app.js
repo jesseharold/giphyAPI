@@ -13,7 +13,7 @@ var giphyApp = {
             var topic = $(this).text();
             giphyApp.getImages(topic);
         });
-        $("#images").on("click", "img.giphyImg", function(){
+        $("#images").on("click", "img.giphy-image", function(){
             var url;
             if ($(this).data("state") === "still"){
                 url = $(this).data("anim-src");
@@ -23,15 +23,15 @@ var giphyApp = {
             }
             $(this).attr("src", url);
         });
-        $("#addChar").on("click", function(){
+        $("#add-character").on("click", function(){
             giphyApp.topics.push($(this).prev("input").val());
             giphyApp.makeButtons();
         });
-        $("#images").on("click", ".seeLarger", function(){
+        $("#images").on("click", ".see-larger", function(){
             giphyApp.showOverlay($(this).data("largeUrl"));
         });
-        $("body").on("click", "#closeOverlay", function(){
-            $("#overlay").hide().find("#lgImage").attr("src", "#");
+        $("body").on("click", "#close-overlay", function(){
+            $("#overlay").hide().find("#large-image").attr("src", "#");
         });
     },//init()
     getImages : function(query, startAt){
@@ -72,7 +72,7 @@ var giphyApp = {
         var container = $("<div>");
         container.addClass("img");
 
-        var img1 = $("<img>").addClass("giphyImg");
+        var img1 = $("<img>").addClass("giphy-image");
         img1.data("anim-src", imgObj.images.downsized.url)
             .data("still-src", imgObj.images.downsized_still.url)
             .data("state", "still")
@@ -82,7 +82,7 @@ var giphyApp = {
         var rating = $("<div>");
         rating.addClass("rating").text("Rating: " + imgObj.rating.toUpperCase());
         var seeLarger = $("<div>");
-        seeLarger.addClass("seeLarger").text("See Larger >")
+        seeLarger.addClass("see-larger").text("See Larger >")
             .data("largeUrl", imgObj.images.original.url);
         rating.append(seeLarger);
         
@@ -90,7 +90,7 @@ var giphyApp = {
         return container;
     }, //createSingleImage()
     showOverlay : function(url){
-        $("#overlay").show().find("#lgImage").attr("src", url);
+        $("#overlay").show().find("#large-image").attr("src", url);
     } // showOverlay()
 };//giphyApp object
 

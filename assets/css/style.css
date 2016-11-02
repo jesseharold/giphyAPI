@@ -48,14 +48,14 @@ div.img {
     margin: 10px;
     position: relative;
 }
-div.img img.giphyImg {
+div.img img.giphy-image {
     width: 100%;
 }
 div.rating {
     text-align: center;
     color: #888;
 }
-div.rating .seeLarger {
+div.rating .see-larger {
     display: inline-block;
     margin-left: 10%;
     text-decoration: underline;
@@ -79,7 +79,7 @@ div.rating .seeLarger {
     right: 0;
     padding: 10% 5%;
 }
-#overlay #overlayBG {
+#overlay #overlay-background {
     background-color: black;
     opacity: .8;
     position: absolute;
@@ -88,12 +88,12 @@ div.rating .seeLarger {
     left: 0;
     right: 0;
 }
-#overlay #lgImage {
+#overlay #large-image {
     display: block;
     margin: auto;
     position: relative;
 }
-#overlay #closeOverlay {
+#overlay #close-overlay {
     display: block;
     margin: auto;
     position: relative;
