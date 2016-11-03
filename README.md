@@ -2,6 +2,7 @@
 Gets images from the giphy API using jquery
 
 https://safe-coast-34334.herokuapp.com/
+
 https://jesseharold.github.io/giphyAPI/
 
 ## Additional Features:
