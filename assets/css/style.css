@@ -94,10 +94,16 @@ div.rating .see-larger {
     position: relative;
 }
 #overlay #close-overlay {
+    font-family: "Yanone Kaffeesatz", Helvetica, sans-serif;
     display: block;
     margin: auto;
     position: relative;
-    margin-top: 2em;
+    margin-top: 1.5em;
+    background-color: #a76623;
+    color: black;
+    text-align: center;
+    font-size: x-large;
+    border: 0;
 }
 /* got this from csstricks.com*/
 .clearfix:after {
