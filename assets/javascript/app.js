@@ -17,9 +17,10 @@ var giphyApp = {
             var url;
             if ($(this).data("state") === "still"){
                 url = $(this).data("anim-src");
+                $(this).data("state", "anim");
             } else {
                 url = $(this).data("still-src");
-
+                $(this).data("state", "still");
             }
             $(this).attr("src", url);
         });
