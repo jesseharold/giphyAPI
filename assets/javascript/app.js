@@ -32,7 +32,7 @@ var giphyApp = {
         $("#images").on("click", ".see-larger", function(){
             giphyApp.showOverlay($(this).data("largeUrl"));
         });
-        $("body").on("click", "#close-overlay", function(){
+        $("body").on("click", "#close-overlay, #overlay-background", function(){
             $("#overlay")
                 .hide()
                 .find("#large-image")
