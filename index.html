@@ -2,27 +2,28 @@
 <html>
 <head>
 	<title>Game of Thrones image getter</title>
-	<link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 	<section id="header" class="clearfix">
 		<h1>Game of Thrones Gifs</h1>
-		<div id="input">
+		<div class="character-input">
 			<h3>Add Your Favorite Characters:</h3>
 			<input type="text" size=25>
 			<button id="add-character" value="submit">Add</button>
 		</div>
 	</section>
-	<section id="buttons" class="clearfix"></section>
-	<section id="images" class="clearfix"></section>
-	<section id="more">More &gt;&gt;</section>
+	<section class="buttons" class="clearfix"></section>
+	<section class="images" class="clearfix"></section>
+	<section class="more">More &gt;&gt;</section>
 	<div id="overlay">
-		<div id="overlay-background"></div>
-		<img src="" id="large-image" />
+		<div class="overlay-background"></div>
+		<img id="large-image" />
 		<button id="close-overlay">Close</button>
 	</div>
+	<script type="text/javascript" src="assets/javascript/config.js"></script>
 	<script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
 </html>

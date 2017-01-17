@@ -34,11 +34,11 @@ section {
     background-position-y: -70px;
     background-repeat: no-repeat;
 }
-#input {
+.character-input {
     text-align: right;
     float: right;
 }
-#buttons {
+.buttons {
     clear: both;
 }
 div.img {    
@@ -61,7 +61,7 @@ div.rating .see-larger {
     text-decoration: underline;
     cursor: pointer;
 }
-#more {
+.more {
     cursor: pointer;
     display: none;
     background-color: #a76623;
@@ -79,7 +79,7 @@ div.rating .see-larger {
     right: 0;
     padding: 10% 5%;
 }
-#overlay #overlay-background {
+#overlay .overlay-background {
     background-color: black;
     opacity: .8;
     position: absolute;
@@ -93,7 +93,7 @@ div.rating .see-larger {
     margin: auto;
     position: relative;
 }
-#overlay #close-overlay {
+#overlay .close-overlay {
     font-family: "Yanone Kaffeesatz", Helvetica, sans-serif;
     display: block;
     margin: auto;
